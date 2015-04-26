@@ -1,0 +1,20 @@
+{
+  "name": "react-native-eval",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/artemyarulin/react-native-eval"
+  },
+  "version": "0.0.1",
+  "description": "Call any JS functions from your native code",
+  "main": "react-native-eval/RNMEvaluator.js",
+  "author": "Artem Yarulin <artem.yarulin@fessguid.com>",
+  "peerDependencies": {
+    "react-native": "^0.4.0"
+  },
+  "keywords": [
+    "react-native",
+    "react",
+    "native",
+    "eval",
+  ]
+}
