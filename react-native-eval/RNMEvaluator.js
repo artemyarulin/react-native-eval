@@ -1,3 +1,8 @@
+/**
+ *
+ * @providesModule RNMEvaluator
+ * @flow
+ */
 'use strict';
 
 var DeviceEventEmitter = require('RCTDeviceEventEmitter'),

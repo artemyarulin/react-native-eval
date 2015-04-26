@@ -24,7 +24,6 @@
 
 /* Begin PBXFileReference section */
 		9689ED5D1AECD6710031F25C /* RNMEvaluator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNMEvaluator.h; sourceTree = "<group>"; };
-		9689ED5E1AECD6710031F25C /* RNMEvaluator.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RNMEvaluator.js; sourceTree = "<group>"; };
 		9689ED5F1AECD6710031F25C /* RNMEvaluator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNMEvaluator.m; sourceTree = "<group>"; };
 		9689EDFB1AECE5470031F25C /* libreact-native-eval.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libreact-native-eval.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -44,7 +43,6 @@
 			isa = PBXGroup;
 			children = (
 				9689ED5D1AECD6710031F25C /* RNMEvaluator.h */,
-				9689ED5E1AECD6710031F25C /* RNMEvaluator.js */,
 				9689ED5F1AECD6710031F25C /* RNMEvaluator.m */,
 				9689EDFC1AECE5470031F25C /* Products */,
 			);
