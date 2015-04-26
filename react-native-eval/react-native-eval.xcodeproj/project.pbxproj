@@ -1,0 +1,76 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		9689ED5D1AECD6710031F25C /* RNMEvaluator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNMEvaluator.h; sourceTree = "<group>"; };
+		9689ED5E1AECD6710031F25C /* RNMEvaluator.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RNMEvaluator.js; sourceTree = "<group>"; };
+		9689ED5F1AECD6710031F25C /* RNMEvaluator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNMEvaluator.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		963F30891AE7DDC100EEA560 = {
+			isa = PBXGroup;
+			children = (
+				9689ED5D1AECD6710031F25C /* RNMEvaluator.h */,
+				9689ED5E1AECD6710031F25C /* RNMEvaluator.js */,
+				9689ED5F1AECD6710031F25C /* RNMEvaluator.m */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		963F308A1AE7DDC100EEA560 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+			};
+			buildConfigurationList = 963F308D1AE7DDC100EEA560 /* Build configuration list for PBXProject "react-native-eval" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 963F30891AE7DDC100EEA560;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		963F308E1AE7DDC100EEA560 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		963F308F1AE7DDC100EEA560 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		963F308D1AE7DDC100EEA560 /* Build configuration list for PBXProject "react-native-eval" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				963F308E1AE7DDC100EEA560 /* Debug */,
+				963F308F1AE7DDC100EEA560 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 963F308A1AE7DDC100EEA560 /* Project object */;
+}
