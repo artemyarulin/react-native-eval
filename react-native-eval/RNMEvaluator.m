@@ -39,7 +39,7 @@ RCT_EXPORT_METHOD(functionCallCompleted:(NSString*)callId error:(NSError*)error 
     
     callbacks[callId] = cb ? cb : (^(NSError* e, id v) { });
     
-    [bridge.eventDispatcher sendDeviceEventWithName:@"RNMEvaluator.callFunctionSync"
+    [bridge.eventDispatcher sendAppEventWithName:@"RNMEvaluator.callFunctionSync"
                                                body:@{@"name": name,
                                                       @"args": args ? args : @[],
                                                       @"callId": callId}];

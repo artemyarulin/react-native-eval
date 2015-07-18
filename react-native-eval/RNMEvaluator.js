@@ -5,10 +5,13 @@
  */
 'use strict';
 
-var DeviceEventEmitter = require('RCTDeviceEventEmitter'),
-    RNMEvaluator = require('NativeModules').RNMEvaluator
+var { NativeAppEventEmitter,
+      NativeModules: {
+	  RNMEvaluator
+      }
+    } = require('react-native')
 
-DeviceEventEmitter.addListener('RNMEvaluator.callFunctionSync',data => {
+NativeAppEventEmitter.addListener('RNMEvaluator.callFunctionSync',data => {
 	var {name,args,callId} = data,
 		func,err,res
  		 
