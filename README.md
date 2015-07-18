@@ -23,7 +23,7 @@ RCTBridge* bridge = [[RCTBridge alloc] initWithBundleURL:[NSURL URLWithString:@"
 [RNMEvaluator callFunction:bridge
                       name:@"Math.pow"
                       args:@[@2,@2]
-                        cb:^(NSError *error, id returnValue) {
+                        cb:^(NSString *error, id returnValue) {
                             if (error)
                                 NSLog(@"Error occured: %@", error);
                             else

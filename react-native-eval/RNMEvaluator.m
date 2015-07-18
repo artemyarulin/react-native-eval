@@ -8,17 +8,9 @@ RCT_EXPORT_MODULE()
 
 static NSMutableDictionary* callbacks;
 
-RCT_EXPORT_METHOD(functionCallCompleted:(NSString*)callId error:(NSError*)error returnVaue:(id)returnVaue)
+RCT_EXPORT_METHOD(functionCallCompleted:(NSString*)callId error:(NSString*)error returnVaue:(id)returnVaue)
 {
     EvaluatorCallback cb = [callbacks objectForKey:callId];
-    if (!cb) {
-#if DEBUG
-        [NSException raise:@"EvaluatorCallbackNotFound" format:@"Callback for callId %@ cannot be found", callId];
-#else
-        NSLog(@"Callback for callId %@ cannot be found", callId);
-#endif
-    }
-    
     cb(error,returnVaue);
     [callbacks removeObjectForKey:callId];
 }
@@ -37,7 +29,7 @@ RCT_EXPORT_METHOD(functionCallCompleted:(NSString*)callId error:(NSError*)error 
     if (!callbacks)
         callbacks = [@{} mutableCopy];
     
-    callbacks[callId] = cb ? cb : (^(NSError* e, id v) { });
+    callbacks[callId] = cb ? cb : (^(NSString* e, id v) { });
     
     [bridge.eventDispatcher sendAppEventWithName:@"RNMEvaluator.callFunctionSync"
                                                body:@{@"name": name,
