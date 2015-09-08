@@ -33,7 +33,7 @@ var execute = (data, executor) => {
   if (typeof func !== 'function')
     return RNMEvaluator.functionCallCompleted(callId,`${name} is not a function`,null)
 
-  try { console.log('before'); res = executor(func).apply(null,args.concat(cb)); console.log('after') }
+  try { res = executor(func).apply(null,args.concat(cb)) }
   catch (e) { RNMEvaluator.functionCallCompleted(callId,`Function ${name} raised an error ${e.message}:${e.stack}`,null) }
 }
 
