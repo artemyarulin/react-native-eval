@@ -1,8 +1,6 @@
 # react-native-eval
 
-React has a good [tutorial](http://facebook.github.io/react-native/docs/embedded-app.html#content) how to integrate React View to alrady existsing application, but it doesn't provide a good way if you decided to migrate some of your business logic to JS first while maintaining the same UI.
-
-React Native doesn't provide a way to [call any JS](https://github.com/facebook/react-native/blob/d937071517b47b3d2e54510a1f695885a27c5e52/React/Executors/RCTContextExecutor.m#L243), so react-native-eval comes to the rescue.
+React has a good [tutorial](http://facebook.github.io/react-native/docs/embedded-app-ios.html#content) how to integrate React View to alrady existsing application, but it doesn't provide a good way if you decided to migrate some of your business logic to JS first while maintaining the same UI.
 
 # Installation
 
@@ -18,17 +16,36 @@ React Native doesn't provide a way to [call any JS](https://github.com/facebook/
 ```objc
 RCTBridge* bridge = [[RCTBridge alloc] initWithBundleURL:[NSURL URLWithString:@"URL_TO_BUNDLE"]
                       moduleProvider:nil
-                       launchOptions:nil];
+                      launchOptions:nil];
+RCTRootView* view = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"app"];
 
-[RNMEvaluator callFunction:bridge
-                      name:@"Math.pow"
-                      args:@[@2,@2]
-                        cb:^(NSString *error, id returnValue) {
-                            if (error)
-                                NSLog(@"Error occured: %@", error);
-                            else
-                                NSLog(@"Function returned: %@", returnValue);
-                        }];
+// Call sync function
+[RNMEvaluator callSyncFunction:bridge
+                          name:@"Math.pow"
+                          args:@[@2,@2]
+                            cb:^(NSString *error, id returnValue) {
+                                if (error)
+                                    NSLog(@"Error occured: %@", error);
+                                else
+                                    NSLog(@"Function returned: %@", returnValue);
+                            }];
+ 
+// You can call async function as well. It has to have callback as a last argument.
+// If callback would be called with Error object then it will be converted to
+// NSString and passed as a first argument of native callback. Otherwise callback
+// value would be passed as a second parameter
+[RNMEvaluator callAsyncFunction:bridge
+                           name:@"(function(a,b,cb) { setTimeout(function() { cb(Math.pow(a,b)) },0) })"
+                           args:@[@2,@2]
+                             cb:^(NSString *error, id returnValue) {
+                                 if (error)
+                                     NSLog(@"Error occured: %@", error);
+                                 else
+                                     NSLog(@"Function returned: %@", returnValue);
+                             }]
+
+
+
 ```
 
-On a JS side be sure to `require('RNMEvaluator')`.
+On a JS side be sure to call `require('RNMEvaluator')`, otherwise needed JS wouldn't be included to the output
