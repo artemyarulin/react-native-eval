@@ -50599,7 +50599,7 @@ RNMEvaluator.functionCallCompleted(callId, 'Function ' + name + ' raised an erro
 
 RNMEvaluator.functionCallCompleted(callId, null, res);};
 
-var func;var err;var res;
+var func;var err;
 
 try{func = eval(name);}
 catch(e) {err = e;}
@@ -50613,7 +50613,7 @@ return RNMEvaluator.functionCallCompleted(callId, 'Function ' + name + ' cannot 
 if(typeof func !== 'function')
 return RNMEvaluator.functionCallCompleted(callId, name + ' is not a function', null);
 
-try{console.log('before');res = executor(func).apply(null, args.concat(cb));console.log('after');}
+try{executor(func).apply(null, args.concat(cb));}
 catch(e) {RNMEvaluator.functionCallCompleted(callId, 'Function ' + name + ' raised an error ' + e.message + ':' + e.stack, null);}};
 
 

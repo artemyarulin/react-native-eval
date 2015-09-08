@@ -19,7 +19,7 @@ var execute = (data, executor) => {
 	else
 	  RNMEvaluator.functionCallCompleted(callId,null,res)
       },
-      func,err,res
+      func,err
 
   try { func = eval(name) }
   catch (e) { err = e }
@@ -33,7 +33,7 @@ var execute = (data, executor) => {
   if (typeof func !== 'function')
     return RNMEvaluator.functionCallCompleted(callId,`${name} is not a function`,null)
 
-  try { res = executor(func).apply(null,args.concat(cb)) }
+  try { executor(func).apply(null,args.concat(cb)) }
   catch (e) { RNMEvaluator.functionCallCompleted(callId,`Function ${name} raised an error ${e.message}:${e.stack}`,null) }
 }
 
