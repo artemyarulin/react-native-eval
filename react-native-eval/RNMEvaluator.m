@@ -15,15 +15,15 @@ RCT_EXPORT_METHOD(functionCallCompleted:(NSString*)callId error:(NSString*)error
     [callbacks removeObjectForKey:callId];
 }
 
-+(void)callFunction:(RCTBridge*)bridge name:(NSString *)name args:(NSArray *)args cb:(EvaluatorCallback)cb
-{
-    if (bridge.loading) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self callFunction:bridge name:name args:args cb:cb];
-        });
-        return;
-    }
-    
++(void)callSyncFunction:(RCTBridge*)bridge name:(NSString *)name args:(NSArray *)args cb:(EvaluatorCallback)cb {
+    [self callFunction:bridge name:name args:args cb:cb event:@"RNMEvaluator.callSyncFunction"];
+}
+
++(void)callAsyncFunction:(RCTBridge*)bridge name:(NSString *)name args:(NSArray *)args cb:(EvaluatorCallback)cb {
+    [self callFunction:bridge name:name args:args cb:cb event:@"RNMEvaluator.callAsyncFunction"];
+}
+
++(void)callFunction:(RCTBridge*)bridge name:(NSString *)name args:(NSArray *)args cb:(EvaluatorCallback)cb event:(NSString*)event {
     NSString* callId = [[NSUUID UUID] UUIDString];
 
     if (!callbacks)
@@ -31,10 +31,10 @@ RCT_EXPORT_METHOD(functionCallCompleted:(NSString*)callId error:(NSString*)error
     
     callbacks[callId] = cb ? cb : (^(NSString* e, id v) { });
     
-    [bridge.eventDispatcher sendAppEventWithName:@"RNMEvaluator.callFunctionSync"
-                                               body:@{@"name": name,
-                                                      @"args": args ? args : @[],
-                                                      @"callId": callId}];
+    [bridge.eventDispatcher sendAppEventWithName:event
+                                            body:@{@"name": name,
+                                                   @"args": args ? args : @[],
+                                                   @"callId": callId}];
 }
 
 @end

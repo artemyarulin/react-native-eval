@@ -25,3 +25,5 @@ DerivedData
 #
 #Pods/
 .DS_Store
+node_modules
+Pods
