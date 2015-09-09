@@ -4,12 +4,10 @@ React has a good [tutorial](http://facebook.github.io/react-native/docs/embedded
 
 # Installation
 
-- `npm init` if it is your first module and you don't have `package.json` yet
+- Make sure that npm and cocoapods initialized: `npm init && pod init`
 - `npm install --save react-native-eval`
-- Drag `react-native-eval.xcodeproj` from the `node_modules/react-native-eval` folder into your XCode project
-- Click on the your project in XCode, goto Build Phases then Link Binary With Libraries and add `libreact-native-eval.a`
-- Add `node_modules/react-native-eval` to `Header search path`
-- If you cannot compile `react-native-eval` because of `RCTBridgeModule.h` missing - open `react-native-eval.xcodeproject` that you've just added and append `Header search path` with React-Native location
+- Add following line to Podfile: `pod 'react-native-eval',:path => 'node_modules/react-native-eval'`
+- `pod install`
 
 # Usage
 - Get a referenct to `RCTBridge`, by getting it from `RCTRootView.bridge` that you have created (if you have any React Native view) or by creating `RCTBridge` manually:
@@ -29,7 +27,7 @@ RCTRootView* view = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"app"
                                 else
                                     NSLog(@"Function returned: %@", returnValue);
                             }];
- 
+
 // You can call async function as well. It has to have callback as a last argument.
 // If callback would be called with Error object then it will be converted to
 // NSString and passed as a first argument of native callback. Otherwise callback
