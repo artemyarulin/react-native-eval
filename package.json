@@ -1,17 +1,20 @@
 {
   "name": "react-native-eval",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/artemyarulin/react-native-eval"
+    "type": "git",
+    "url": "git+https://github.com/artemyarulin/react-native-eval.git"
   },
   "scripts": {
-    "start": "./node_modules/react-native/packager/packager.sh --reset-cache --root react-native-eval",
+    "start": "./node_modules/react-native/packager/packager.sh --reset-cache",
     "update": "wget -O react-native-eval/js/app.js http://localhost:8081/index.ios.bundle"
   },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Call any JS functions from your native code",
-  "main": "react-native-eval/RNMEvaluator.js",
-  "author": "Artem Yarulin <artem.yarulin@fessguid.com>",
+  "main": "RNMEvaluator.js",
+  "author": {
+    "name": "Artem Yarulin",
+    "email": "artem.yarulin@fessguid.com"
+  },
   "peerDependencies": {
     "react-native": ""
   },
@@ -20,5 +23,16 @@
     "react",
     "native",
     "eval"
-  ]
+  ],
+  "readme": "# react-native-eval\n\nReact has a good [tutorial](http://facebook.github.io/react-native/docs/embedded-app-ios.html#content) how to integrate React View to alrady existsing application, but it doesn't provide a good way if you decided to migrate some of your business logic to JS first while maintaining the same UI.\n\n# Installation\n\n- Make sure that npm and cocoapods initialized: `npm init && pod init`\n- `npm install --save react-native-eval`\n- Add following line to Podfile: `pod 'react-native-eval',:path => 'node_modules/react-native-eval'`\n- `pod install`\n\n# Usage\n- Get a referenct to `RCTBridge`, by getting it from `RCTRootView.bridge` that you have created (if you have any React Native view) or by creating `RCTBridge` manually:\n```objc\nRCTBridge* bridge = [[RCTBridge alloc] initWithBundleURL:[NSURL URLWithString:@\"URL_TO_BUNDLE\"]\n                      moduleProvider:nil\n                      launchOptions:nil];\nRCTRootView* view = [[RCTRootView alloc] initWithBridge:bridge moduleName:@\"app\"];\n\n// Call sync function\n[RNMEvaluator callSyncFunction:bridge\n                          name:@\"Math.pow\"\n                          args:@[@2,@2]\n                            cb:^(NSString *error, id returnValue) {\n                                if (error)\n                                    NSLog(@\"Error occured: %@\", error);\n                                else\n                                    NSLog(@\"Function returned: %@\", returnValue);\n                            }];\n\n// You can call async function as well. It has to have callback as a last argument.\n// If callback would be called with Error object then it will be converted to\n// NSString and passed as a first argument of native callback. Otherwise callback\n// value would be passed as a second parameter\n[RNMEvaluator callAsyncFunction:bridge\n                           name:@\"(function(a,b,cb) { setTimeout(function() { cb(Math.pow(a,b)) },0) })\"\n                           args:@[@2,@2]\n                             cb:^(NSString *error, id returnValue) {\n                                 if (error)\n                                     NSLog(@\"Error occured: %@\", error);\n                                 else\n                                     NSLog(@\"Function returned: %@\", returnValue);\n                             }]\n\n\n\n```\n\nOn a JS side be sure to call `require('RNMEvaluator')`, otherwise needed JS wouldn't be included to the output\n",
+  "readmeFilename": "README.md",
+  "gitHead": "a49371aa394aa56724e948c5a4780688cc80a9a0",
+  "bugs": {
+    "url": "https://github.com/artemyarulin/react-native-eval/issues"
+  },
+  "homepage": "https://github.com/artemyarulin/react-native-eval#readme",
+  "_id": "react-native-eval@0.1.0",
+  "_shasum": "f016db657efbf483f92d006324f0bb2d5b64a4e1",
+  "_from": "../react-native-eval",
+  "_resolved": "file:../react-native-eval"
 }
