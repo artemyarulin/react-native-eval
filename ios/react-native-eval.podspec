@@ -8,13 +8,8 @@ Pod::Spec.new do |s|
   s.author         = { "Artem Yarulin" => "artem.yarulin@fessguid.com" }
   s.platform       = :ios, "7.0"
   s.source         = { :git => "https://github.com/artemyarulin/react-native-eval.git", :tag => s.version.to_s }
-  s.default_subspec     = 'Core'
+  s.source_files   = ["react-native-eval/RNMEvaluator.{h,m}"]
+  s.public_header_files = "react-native-eval/RNMEvaluator.h"
   s.requires_arc  = true
   s.dependency "React"
-
-  s.subspec 'Core' do |ss|
-    ss.source_files   = ["RNMEvaluator.{h,m}"]
-    ss.public_header_files = "RNMEvaluator.h"
-    ss.preserve_paths   = '*.js'
-  end
 end
