@@ -10,7 +10,7 @@
   },
   "version": "0.2.0",
   "description": "Call any JS functions from your native code",
-  "main": "react-native-eval/RNMEvaluator.js",
+  "main": "RNMEvaluator.js",
   "author": "Artem Yarulin <artem.yarulin@fessguid.com>",
   "peerDependencies": {
     "react-native": ""
