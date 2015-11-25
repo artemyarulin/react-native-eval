@@ -18,12 +18,12 @@
 -(void)setUp {
     [super setUp];
     isDone = NO;
-    
+
     NSString* bundlePath = [[NSBundle mainBundle] bundlePath];
     bridge = [[RCTBridge alloc] initWithBundleURL:[NSURL fileURLWithPath:[bundlePath stringByAppendingPathComponent:@"js/app.js"]]
                                    moduleProvider:nil
                                     launchOptions:nil];
-    
+
     view = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"app"];
 }
 
@@ -43,12 +43,12 @@
 - (void)execAsync:(NSString*)cmd args:(NSArray*)args cb:(EvaluatorCallback)cb
 {
     [RNMEvaluator callAsyncFunction:bridge
-                              name:cmd
-                              args:args
-                                cb:^(NSString *error, id returnValue) {
-                                    cb(error,returnValue);
-                                    isDone = YES;
-                                }];
+                               name:cmd
+                               args:args
+                                 cb:^(NSString *error, id returnValue) {
+                                     cb(error,returnValue);
+                                     isDone = YES;
+                                 }];
     if (!isDone)
         WAIT_WHILE(!isDone, 100);
 }
@@ -66,7 +66,7 @@
                  cb:^(NSString *error, id returnValue) {
                      XCTAssertNil(error,@"Error occured: %@", error);
                      XCTAssertEqualObjects(returnValue, @4);
-    }];
+                 }];
 }
 
 - (void)testNotFound {
@@ -86,17 +86,17 @@
     [self execSync:@"(function(err) { throw new Error(err) })"
               args:@[err]
                 cb:^(NSString *error, id returnValue) {
-        XCTAssert([error containsString:err],@"Incorrect message");
-    }];
+                    XCTAssert([error containsString:err],@"Incorrect message");
+                }];
 }
 
 - (void)testAsyncException {
     NSString* err = @"Ooops";
     [self execAsync:@"(function(err,cb) { setTimeout(function() { cb(new Error(err)) },0) })"
-              args:@[err]
-                cb:^(NSString *error, id returnValue) {
-        XCTAssert([error containsString:err],@"Incorrect message");
-    }];
+               args:@[err]
+                 cb:^(NSString *error, id returnValue) {
+                     XCTAssert([error containsString:err],@"Incorrect message");
+                 }];
 }
 
 

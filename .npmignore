@@ -1,6 +1,5 @@
 # Xcode
 #
-project.xcworkspace
 build/
 *.pbxuser
 !default.pbxuser
@@ -26,9 +25,3 @@ DerivedData
 #
 #Pods/
 .DS_Store
-
-node_modules
-.idea
-local.properties
-.gradle
-*.iml

@@ -8,9 +8,9 @@
     "start": "./node_modules/react-native/packager/packager.sh --reset-cache --root react-native-eval",
     "update": "wget -O react-native-eval/js/app.js http://localhost:8081/index.ios.bundle"
   },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Call any JS functions from your native code",
-  "main": "react-native-eval/RNMEvaluator.js",
+  "main": "RNMEvaluator.js",
   "author": "Artem Yarulin <artem.yarulin@fessguid.com>",
   "peerDependencies": {
     "react-native": ""

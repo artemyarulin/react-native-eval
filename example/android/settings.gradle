@@ -1,0 +1,6 @@
+rootProject.name = 'AProject'
+
+include ':app'
+
+include ':react-native-eval'
+project(':react-native-eval').projectDir = new File(settingsDir, './node_modules/react-native-eval/android')

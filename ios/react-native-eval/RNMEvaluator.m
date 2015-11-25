@@ -8,10 +8,20 @@ RCT_EXPORT_MODULE()
 
 static NSMutableDictionary* callbacks;
 
-RCT_EXPORT_METHOD(functionCallCompleted:(NSString*)callId error:(NSString*)error returnVaue:(id)returnVaue)
+/**
+ * This broadcasts the given event via the NSNotficationCenter
+ */
+RCT_EXPORT_METHOD(emit:(NSString*)event value:(NSDictionary*)value)
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:event
+                                                        object:(value==nil?nil:value[@"_value"])
+                                                      userInfo:nil];
+}
+
+RCT_EXPORT_METHOD(functionCallCompleted:(NSString*)callId error:(NSString*)error returnVaue:(NSDictionary*)returnVaue)
 {
     EvaluatorCallback cb = [callbacks objectForKey:callId];
-    cb(error,returnVaue);
+    cb(error,returnVaue==nil?nil:returnVaue[@"_value"]);
     [callbacks removeObjectForKey:callId];
 }
 
@@ -28,10 +38,11 @@ RCT_EXPORT_METHOD(functionCallCompleted:(NSString*)callId error:(NSString*)error
 
     if (!callbacks)
         callbacks = [@{} mutableCopy];
-    
+
     callbacks[callId] = cb ? cb : (^(NSString* e, id v) { });
-    
-    [bridge.eventDispatcher sendAppEventWithName:event
+
+    // TODO: move to sendAppEventWithName once App events are supported on android.
+    [bridge.eventDispatcher sendDeviceEventWithName:event
                                             body:@{@"name": name,
                                                    @"args": args ? args : @[],
                                                    @"callId": callId}];

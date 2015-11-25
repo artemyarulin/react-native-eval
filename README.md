@@ -1,16 +1,105 @@
 # react-native-eval
 
-React has a good [tutorial](http://facebook.github.io/react-native/docs/embedded-app-ios.html#content) how to integrate React View to alrady existsing application, but it doesn't provide a good way if you decided to migrate some of your business logic to JS first while maintaining the same UI.
+React has a good [tutorial](http://facebook.github.io/react-native/docs/embedded-app-ios.html#content) how to integrate React View to already existing application, but it doesn't provide a good way if you decided to migrate some of your business logic to JS first while maintaining the same UI.
 
-# Installation
+## Installation
 
-- Make sure that npm and cocoapods initialized: `npm init && pod init`
-- `npm install --save react-native-eval`
-- Add following line to Podfile: `pod 'react-native-eval',:path => 'node_modules/react-native-eval'`
-- `pod install`
+* `npm init`. Initialize npm
+* `npm install --save react-native-eval`. Install react-native-eavl
 
-# Usage
-- Get a referenct to `RCTBridge`, by getting it from `RCTRootView.bridge` that you have created (if you have any React Native view) or by creating `RCTBridge` manually:
+### `iOS`
+
+*  `pod init`. Initialize [CocoaPods](https://cocoapods.org/).
+*  Add following line to Podfile: `pod 'react-native-eval',:path => 'node_modules/react-native-eval/ios'`
+*  `pod install`.  Update the project.
+
+### `Android`
+
+* `android/settings.gradle`
+
+```gradle
+...
+include ':react-native-eval'
+project(':react-native-eval').projectDir = new File(settingsDir, '../node_modules/react-native-eval/android')
+```
+* `android/app/build.gradle`
+
+```gradle
+dependencies {
+	...
+	compile project(':react-native-eval')
+}
+```
+
+* register module (in MainActivity.java)
+
+```java
+...
+
+import com.evaluator.react.*; // <--- import
+
+public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
+	...
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mReactInstanceManager = ReactInstanceManager.builder()
+                .setApplication(getApplication())
+                .setBundleAssetName("index.android.bundle")
+                .setJSMainModuleName("index.android")
+                .addPackage(new MainReactPackage())
+                .addPackage(new RNMEPackage())           // <- add here
+                .setUseDeveloperSupport(BuildConfig.DEBUG)
+                .setInitialLifecycleState(LifecycleState.RESUMED)
+                .build();
+
+        try {
+            Method method = getReactContextInitialize();
+            method.setAccessible(true);
+            method.invoke(mReactInstanceManager);
+            method.setAccessible(false);
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        setContentView(R.layout.activity_main);
+    }
+
+    private Method getReactContextInitialize() {
+        Method method;
+        try {
+            // RN 14
+            method = mReactInstanceManager.getClass()
+              .getDeclaredMethod("initializeReactContext");
+        } catch (NoSuchMethodException e) {
+            method = null;
+        }
+
+        if (method == null) {
+            try {
+                // RN 15
+                method = mReactInstanceManager.getClass()
+                  .getDeclaredMethod("createReactContextInBackground");
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return method;
+    }
+}
+```
+
+Buckle up, Dorothy
+
+# iOS
+
+*  Get a reference to `RCTBridge`, by getting it from `RCTRootView.bridge` that you have created (if you have any React Native view) or by creating `RCTBridge` manually:
+
 ```objc
 RCTBridge* bridge = [[RCTBridge alloc] initWithBundleURL:[NSURL URLWithString:@"URL_TO_BUNDLE"]
                       moduleProvider:nil
@@ -41,9 +130,9 @@ RCTRootView* view = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"app"
                                  else
                                      NSLog(@"Function returned: %@", returnValue);
                              }]
-
-
-
 ```
 
-On a JS side be sure to call `require('RNMEvaluator')`, otherwise needed JS wouldn't be included to the output
+
+# Javascript
+
+*  Call `require('react-native-eval')`, to ensure that the module is included.

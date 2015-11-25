@@ -157,6 +157,7 @@
 				C773A5211B9EDFCB00560228 /* Frameworks */,
 				C773A5221B9EDFCB00560228 /* Resources */,
 				4D830F7A9C0BE934D54EEAEC /* Copy Pods Resources */,
+				0FFF7EEF92C1451AD9B4AC4D /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -176,6 +177,7 @@
 				C773A53A1B9EDFCB00560228 /* Frameworks */,
 				C773A53B1B9EDFCB00560228 /* Resources */,
 				D769004E94084973DA519B7E /* Copy Pods Resources */,
+				3255C340FC17F356DB07B529 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -243,6 +245,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0FFF7EEF92C1451AD9B4AC4D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-react-native-eval/Pods-react-native-eval-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3255C340FC17F356DB07B529 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-react-native-evalTests/Pods-react-native-evalTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4D830F7A9C0BE934D54EEAEC /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -423,6 +455,12 @@
 			baseConfigurationReference = 07C5748706B0AE2FA1BFC543 /* Pods-react-native-eval.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AGAsyncTestHelper\"",
+					"\"${PODS_ROOT}/Headers/Public/React\"",
+				);
 				INFOPLIST_FILE = "react-native-eval/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
@@ -435,6 +473,12 @@
 			baseConfigurationReference = 477DCEBD4411B33D22BD460A /* Pods-react-native-eval.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AGAsyncTestHelper\"",
+					"\"${PODS_ROOT}/Headers/Public/React\"",
+				);
 				INFOPLIST_FILE = "react-native-eval/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
