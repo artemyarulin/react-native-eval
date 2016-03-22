@@ -81,7 +81,7 @@ import javax.annotation.Nullable;
             return null;
         }
 
-        com.facebook.react.bridge.ReadableMapKeySeyIterator iterator = readableMap.keySetIterator();
+        com.facebook.react.bridge.ReadableMapKeySetIterator iterator = readableMap.keySetIterator();
         if (!iterator.hasNextKey()) {
             return null;
         }
