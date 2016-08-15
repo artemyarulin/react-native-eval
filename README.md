@@ -2,18 +2,17 @@
 
 React has a good [tutorial](http://facebook.github.io/react-native/docs/embedded-app-ios.html#content) how to integrate React View to already existing application, but it doesn't provide a good way if you decided to migrate some of your business logic to JS first while maintaining the same UI.
 
-## Installation
+## Automatic installation
 
-* `npm init`. Initialize npm
-* `npm install --save react-native-eval`. Install react-native-eavl
+* `npm install react-native-eval && react-native link react-native-eval`
 
-### `iOS`
+### Manual installation `iOS`
 
 *  `pod init`. Initialize [CocoaPods](https://cocoapods.org/).
 *  Add following line to Podfile: `pod 'react-native-eval',:path => 'node_modules/react-native-eval/ios'`
 *  `pod install`.  Update the project.
 
-### `Android`
+### Manual installation `Android`
 
 * `android/settings.gradle`
 

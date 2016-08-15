@@ -15,6 +15,9 @@
   "peerDependencies": {
     "react-native": ""
   },
+  "devDependencies": {
+    "react-native": ""
+  },
   "keywords": [
     "react-native",
     "react",
