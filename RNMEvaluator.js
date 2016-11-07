@@ -15,6 +15,10 @@ var {
 var execute = (data, executor) => {
   var {name,args,callId} = data,
       cb = res => {
+        if (res instanceof Promise) {
+          res.then(result => RNMEvaluator.functionCallCompleted(callId, null, {_value: result}));
+          return;
+        }
       	if (res instanceof Error) {
       	  RNMEvaluator.functionCallCompleted(callId, `Function ${name} raised an error ${res.message}:${res.stack}`,null);
       	} else {
