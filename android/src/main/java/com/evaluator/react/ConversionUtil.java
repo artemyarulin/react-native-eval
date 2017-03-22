@@ -40,7 +40,7 @@ import javax.annotation.Nullable;
         ReadableType readableType = readableMap.getType(key);
         switch (readableType) {
             case Null:
-                result = key;
+                result = null;
                 break;
             case Boolean:
                 result = readableMap.getBoolean(key);
