@@ -8,6 +8,13 @@ RCT_EXPORT_MODULE()
 
 static NSMutableDictionary* callbacks;
 
+RCT_EXPORT_METHOD(emit:(NSString*)event value:(NSDictionary*)value)
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:event
+                                                        object:value
+                                                      userInfo:nil];
+}
+
 RCT_EXPORT_METHOD(functionCallCompleted:(NSString*)callId error:(NSString*)error returnVaue:(id)returnVaue)
 {
     EvaluatorCallback cb = [callbacks objectForKey:callId];
@@ -28,9 +35,9 @@ RCT_EXPORT_METHOD(functionCallCompleted:(NSString*)callId error:(NSString*)error
 
     if (!callbacks)
         callbacks = [@{} mutableCopy];
-    
+
     callbacks[callId] = cb ? cb : (^(NSString* e, id v) { });
-    
+
     [bridge.eventDispatcher sendAppEventWithName:event
                                             body:@{@"name": name,
                                                    @"args": args ? args : @[],
